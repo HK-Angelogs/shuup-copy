@@ -3,14 +3,11 @@ FROM node:12.21.0-buster-slim as base
 # This image is NOT made for production use.
 LABEL maintainer="Eero Ruohola <eero.ruohola@shuup.com>"
 
-RUN apt-get update \
-    && apt-get --assume-yes install \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         libpangocairo-1.0-0 \
         python3 \
-        python3-dev \
-        python3-pil \
-        python3-pip \
-    && rm -rf /var/lib/apt/lists/ /var/cache/apt/
+    && rm -rf /var/lib/apt/lists/*
+
 
 # These invalidate the cache every single time but
 # there really isn't any other obvious way to do this.
